@@ -1,0 +1,10 @@
+name: Simples
+version: '${project.version}'
+main: chiru.simples.Simples
+api-version: 1.19
+author: Chiru
+description: The only plugin you need!
+softdepend: [PlaceholderAPI]
+commands:
+  Simples:
+    description: Main Command!
