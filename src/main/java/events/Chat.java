@@ -1,6 +1,8 @@
 package events;
 
 import chiru.simples.Simples;
+import me.clip.placeholderapi.PlaceholderAPI;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,11 +20,13 @@ public class Chat implements Listener {
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent event){
 
-        String chatformat = plugin.getConfig().getString("Config.chat-format");
+        String text = plugin.getConfig().getString("Config.chat-format");
 
         Player player = event.getPlayer();
 
-        event.setFormat(chatformat.replace("{DISPLAY_NAME}", "%1$s").replace("{MESSAGE}","%2$s"));
+        String formatedText = ChatColor.translateAlternateColorCodes('&',text.replace("{DISPLAY_NAME}", "%1$s").replace("{MESSAGE}","%2$s").replace("{GROUP_PREFIX}", PlaceholderAPI.setPlaceholders(player,"%vault_groupprefix%")));
+
+        event.setFormat(formatedText);
 
     }
 }
