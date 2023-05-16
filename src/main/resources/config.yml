@@ -9,4 +9,7 @@ Config:
 
         welcome-message: "&e&kI &a&lWelcome %player_name%! &rThis welcome message, has been created with &6&lSimple Welcome&r!, change this on the &4&lconfig.yml &e&kI"
 
+    #Use the following formats for the "chat-format"
+    #   {MESSAGE} - The message
+    #   {DISPLAY_NAME} - The player's name
     chat-format: "{DISPLAY_NAME} : {MESSAGE}"
