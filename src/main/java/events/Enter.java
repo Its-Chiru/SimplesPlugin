@@ -28,8 +28,13 @@ private final Simples plugin;
 	    String path = "Config.SimpleServerWelcome.enabled";
 	    if(config.getString(path).equals("true")) {
 	    	
-	    	String texto = PlaceholderAPI.setPlaceholders(jugador, config.getString("Config.SimpleServerWelcome.welcome-message"));
-			event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', texto));
+	    	if(plugin.hasPapi == true){
+				String texto = PlaceholderAPI.setPlaceholders(jugador, config.getString("Config.SimpleServerWelcome.welcome-message"));
+				event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', texto));
+			}
+			else {
+				event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', config.getString("Config.SimpleServerWelcome.welcome-message")));
+			}
 	    	
 	    }
 
