@@ -24,9 +24,19 @@ public class Chat implements Listener {
 
         Player player = event.getPlayer();
 
-        String formatedText = ChatColor.translateAlternateColorCodes('&',text.replace("{DISPLAY_NAME}", "%1$s").replace("{MESSAGE}","%2$s").replace("{GROUP_PREFIX}", PlaceholderAPI.setPlaceholders(player,"%vault_groupprefix%")));
+        String formatedText = ChatColor.translateAlternateColorCodes('&',text.replace("{DISPLAY_NAME}", "%1$s").replace("{MESSAGE}","%2$s")));
 
-        event.setFormat(formatedText);
+        String papiText = formatedText.replace("{GROUP_PREFIX}", PlaceholderAPI.setPlaceholders(player,"%vault_groupprefix%");
+
+
+        //If it has papi installed
+        if(plugin.hasPapi == true){
+            event.setFormat(papiText);
+        }
+        else {
+            //If it doest
+            event.setFormat(formatedText);
+        }
 
     }
 }
