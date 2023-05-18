@@ -12,5 +12,5 @@ Config:
     #Use the following formats for the "chat-format"
     #   {MESSAGE} - The message
     #   {DISPLAY_NAME} - The player's name
-    #   {GROUP_PREFIX} - The player's group prefix *this uses Vault*
+    #   {GROUP_PREFIX} - The player's group prefix *this uses Vault, this would be %vault_groupprefix%*
     chat-format: "{GROUP_PREFIX} &7| &r{DISPLAY_NAME} &r: &7{MESSAGE}"
