@@ -30,6 +30,9 @@ public class MainCommand implements CommandExecutor{
 			}else if(args[0].equalsIgnoreCase("reload") && jugador.isOp()) {
 				
 				plugin.reloadConfig();
+				for (Player player : Bukkit.getOnlinePlayers()){
+					plugin.tabLoad(player);
+				}
 				Bukkit.getConsoleSender().sendMessage("["+plugin.name+"]"+ChatColor.GREEN+" Config reloaded!");
 				jugador.sendMessage("["+plugin.name+"]"+ChatColor.GREEN+" Config reloaded!");
 				return true;

@@ -10,6 +10,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import javax.swing.*;
+import java.util.List;
+
 public class Enter implements Listener{
 	
 private final Simples plugin;
@@ -24,7 +27,6 @@ private final Simples plugin;
 	    Player jugador = event.getPlayer();
 	   	    
 	    FileConfiguration config = plugin.getConfig();
-	    
 	    String path = "Config.SimpleServerWelcome.enabled";
 	    if(config.getString(path).equals("true")) {
 	    	
@@ -37,6 +39,10 @@ private final Simples plugin;
 			}
 	    	
 	    }
+
+		//Tab
+
+		plugin.tabLoad(jugador);
 
 	}
 

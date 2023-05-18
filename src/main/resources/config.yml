@@ -14,3 +14,21 @@ Config:
     #   {DISPLAY_NAME} - The player's name
     #   {GROUP_PREFIX} - The player's group prefix *this uses Vault, this would be %vault_groupprefix%*
     chat-format: "{GROUP_PREFIX} &7| &r{DISPLAY_NAME} &r: &7{MESSAGE}"
+
+    #For the tab, you can use placeholders and colors, it reloads using the reload plugin, and rejoining!
+    tab:
+
+        enabled: true
+
+        #This variable sets the time after each load of the placeholders (dont set this too low)
+        seconds: 15
+
+        header:
+            - "&9&lMy Server"
+            - "&eThis server uses &f: &4&lSimples"
+            - "&fThere are &r: &a%server_online% online &fplayers!"
+            - ""
+        footer:
+            - ""
+            - "&a&lUPTIME : %server_uptime%"
+            - "&e&lTPS : %server_tps_1%"
