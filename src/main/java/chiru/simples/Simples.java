@@ -1,15 +1,21 @@
 package chiru.simples;
 
 import commands.MainCommand;
+import commands.MainCommandTAB;
 import events.Chat;
 import events.Enter;
+import fr.mrmicky.fastboard.FastBoard;
+import jdk.tools.jmod.Main;
 import me.clip.placeholderapi.PlaceholderAPI;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scoreboard.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class Simples extends JavaPlugin {
@@ -41,6 +47,7 @@ public final class Simples extends JavaPlugin {
         //Register Commands
 
         getCommand("simples").setExecutor(new MainCommand(this));
+        getCommand("simples").setTabCompleter(new MainCommandTAB());
 
         //Place Holder Api
 
@@ -53,6 +60,9 @@ public final class Simples extends JavaPlugin {
 
         //Tab Scheduler
         tabScheduleLoad();
+
+        //Scoreboard Scheduler
+        scoreboardScheduleLoad();
 
     }
 
@@ -100,9 +110,60 @@ public final class Simples extends JavaPlugin {
         Bukkit.getScheduler().runTaskTimer(this, () ->{
             for(Player player : Bukkit.getOnlinePlayers()){
                 tabLoad(player);
-                System.out.println(player.getName()+" Reloaded tab!");
             }
         }, 0, tabSeconds * 20);
     }
+
+    //Scoreboard
+
+    public void scoreboardLoad(Player player) {
+        // Scoreboard using FastBoard
+        // Link: https://github.com/MrMicky-FR/FastBoard
+        FastBoard board = new FastBoard(player);
+
+        // Set title
+        String title = ChatColor.translateAlternateColorCodes('&', getConfig().getString("Config.scoreboard.title"));
+        board.updateTitle(title);
+
+        // Change Lines
+        List<String> lines = getConfig().getStringList("Config.scoreboard.values");
+        List<String> coloredLines = new ArrayList<>();
+        List<String> papiLines = new ArrayList<>();
+        for (String line : lines) {
+            //Color Lines
+            String coloredLine = ChatColor.translateAlternateColorCodes('&', line);
+            //Check Placeholders
+            if(hasPapi){
+                String papiLine = PlaceholderAPI.setPlaceholders(player, coloredLine);
+                papiLines.add(papiLine);
+
+            }
+            else {
+
+                coloredLines.add(coloredLine);
+
+            };
+        }
+        //Save lines
+        //Check Placeholders Again
+        if(hasPapi){
+            board.updateLines(papiLines);
+        }
+        else {
+            board.updateLines(coloredLines);
+        }
+    }
+
+    //Scoreboard Schedule
+
+    public void scoreboardScheduleLoad(){
+        int tabSeconds = getConfig().getInt("Config.scoreboard.seconds");
+        Bukkit.getScheduler().runTaskTimer(this, () ->{
+            for(Player player : Bukkit.getOnlinePlayers()){
+                scoreboardLoad(player);
+            }
+        }, 0, tabSeconds * 20);
+    }
+
 
 }

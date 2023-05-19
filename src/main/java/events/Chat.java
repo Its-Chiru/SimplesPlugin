@@ -29,7 +29,8 @@ public class Chat implements Listener {
         //If it has papi installed
         if(plugin.hasPapi == true){
             String papiText = formatedText.replace("{GROUP_PREFIX}", PlaceholderAPI.setPlaceholders(player,"%vault_groupprefix%"));
-            event.setFormat(papiText);
+            String coloredPapiText = ChatColor.translateAlternateColorCodes('&',papiText);
+            event.setFormat(coloredPapiText);
         }
         else {
             //If it doest

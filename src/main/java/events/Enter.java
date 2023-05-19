@@ -44,6 +44,10 @@ private final Simples plugin;
 
 		plugin.tabLoad(jugador);
 
+		//Scoreboard
+
+		plugin.scoreboardLoad(jugador);
+
 	}
 
 

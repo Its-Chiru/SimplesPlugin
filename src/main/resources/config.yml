@@ -25,10 +25,26 @@ Config:
 
         header:
             - "&9&lMy Server"
+            - ""
             - "&eThis server uses &f: &4&lSimples"
             - "&fThere are &r: &a%server_online% online &fplayers!"
             - ""
         footer:
             - ""
-            - "&a&lUPTIME : %server_uptime%"
+            - "&a&lPING : %player_ping%"
             - "&e&lTPS : %server_tps_1%"
+
+    scoreboard:
+
+        #This variable sets the time after each load of the placeholders (dont set this too low)
+        seconds: 15
+
+        title: "&4&lScoreboard"
+        values:
+            - ""
+            - "&a&lStats:"
+            - "&eKills: &r%statistic_player_kills%"
+            - "&eDeaths: &r%statistic_deaths%"
+            - ""
+            - "&a&lInfo:"
+            - "&rPing: &c%player_ping%"

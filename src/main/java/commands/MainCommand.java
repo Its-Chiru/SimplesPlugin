@@ -32,6 +32,7 @@ public class MainCommand implements CommandExecutor{
 				plugin.reloadConfig();
 				for (Player player : Bukkit.getOnlinePlayers()){
 					plugin.tabLoad(player);
+					plugin.scoreboardLoad(player);
 				}
 				Bukkit.getConsoleSender().sendMessage("["+plugin.name+"]"+ChatColor.GREEN+" Config reloaded!");
 				jugador.sendMessage("["+plugin.name+"]"+ChatColor.GREEN+" Config reloaded!");
