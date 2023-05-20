@@ -77,6 +77,14 @@ public final class Simples extends JavaPlugin {
 
     public void tabLoad(Player player){
         if(getConfig().getBoolean("Config.tab.enabled") == true){
+
+            //Name of the player
+
+            String name = getConfig().getString("Config.tab.name");
+            String coloredName = ChatColor.translateAlternateColorCodes('&',name);
+
+            //Rest of tab
+
             List<String> headerLines = getConfig().getStringList("Config.tab.header");
 
             String combinedHeader = String.join("\n", headerLines);
@@ -97,10 +105,16 @@ public final class Simples extends JavaPlugin {
                 String papiHeader = PlaceholderAPI.setPlaceholders(player, coloredHeader);
                 String papiFooter = PlaceholderAPI.setPlaceholders(player, coloredFooter);
                 player.setPlayerListHeaderFooter(papiHeader, papiFooter);
+                //For the name of the tab
+                String papiName = PlaceholderAPI.setPlaceholders(player,coloredName);
+                String coloredPapiName = ChatColor.translateAlternateColorCodes('&', papiName);
+                player.setPlayerListName(coloredPapiName);
             }
             else {
                 player.setPlayerListHeaderFooter(coloredHeader, coloredFooter);
-            }        }
+                player.setPlayerListName(coloredName);
+            }
+        }
     }
 
     //Tab load after a time!

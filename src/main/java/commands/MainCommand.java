@@ -9,9 +9,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class MainCommand implements CommandExecutor{
-	
+
 	private Simples plugin;
-	
+
 	public MainCommand(Simples plugin) {
 
 		this.plugin = plugin;
@@ -20,15 +20,15 @@ public class MainCommand implements CommandExecutor{
 
 	public boolean onCommand(CommandSender sender, Command comando, String label, String[] args) {
 		Player jugador = (Player) sender;
-		
+
 		if(args.length > 0) {
 			if(args[0].equalsIgnoreCase("version")) {
-				
+
 				jugador.sendMessage("["+plugin.name+"]"+ChatColor.GOLD+" The version of the plugin is : "+ChatColor.WHITE+plugin.version);
 				return true;
-				
+
 			}else if(args[0].equalsIgnoreCase("reload") && jugador.isOp()) {
-				
+
 				plugin.reloadConfig();
 				for (Player player : Bukkit.getOnlinePlayers()){
 					plugin.tabLoad(player);
@@ -37,12 +37,19 @@ public class MainCommand implements CommandExecutor{
 				Bukkit.getConsoleSender().sendMessage("["+plugin.name+"]"+ChatColor.GREEN+" Config reloaded!");
 				jugador.sendMessage("["+plugin.name+"]"+ChatColor.GREEN+" Config reloaded!");
 				return true;
-				
+
+
+			}else if(args[0].equalsIgnoreCase("support")){
+
+				jugador.sendMessage("["+plugin.name+"]"+ChatColor.GOLD+" Need help with our plugin?");
+				jugador.sendMessage(ChatColor.WHITE+"Join our discord : "+ChatColor.BLUE+"https://discord.gg/tADWVzqtWj");
+				return true;
+
 			}else {
-				
+
 				jugador.sendMessage("["+plugin.name+"]"+ChatColor.RED+" That command doesnt exist!");
 				return true;
-				
+
 			}
 		}else {
 			jugador.sendMessage("["+plugin.name+"]"+ChatColor.RED+" That command doesnt exist, try another one!");

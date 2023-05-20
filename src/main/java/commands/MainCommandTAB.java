@@ -16,6 +16,7 @@ public class MainCommandTAB implements TabCompleter {
             List<String> arguments = new ArrayList<>();
             arguments.add("reload");
             arguments.add("version");
+            arguments.add("support");
 
             return arguments;
 
