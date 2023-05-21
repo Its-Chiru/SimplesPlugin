@@ -24,21 +24,20 @@ private final Simples plugin;
 	@EventHandler
 	public void alEntrar(PlayerJoinEvent event) {
 
-	    Player jugador = event.getPlayer();
-	   	    
-	    FileConfiguration config = plugin.getConfig();
-	    String path = "Config.SimpleServerWelcome.enabled";
-	    if(config.getString(path).equals("true")) {
-	    	
-	    	if(plugin.hasPapi == true){
+		Player jugador = event.getPlayer();
+
+		FileConfiguration config = plugin.getConfig();
+		String path = "Config.SimpleServerWelcome.enabled";
+		if (config.getString(path).equals("true")) {
+
+			if (plugin.hasPapi == true) {
 				String texto = PlaceholderAPI.setPlaceholders(jugador, config.getString("Config.SimpleServerWelcome.welcome-message"));
 				event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', texto));
-			}
-			else {
+			} else {
 				event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', config.getString("Config.SimpleServerWelcome.welcome-message")));
 			}
-	    	
-	    }
+
+		}
 
 		//Tab
 
@@ -49,6 +48,5 @@ private final Simples plugin;
 		plugin.scoreboardLoad(jugador);
 
 	}
-
 
 }

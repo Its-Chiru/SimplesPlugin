@@ -18,13 +18,13 @@ public class MainCommand implements CommandExecutor{
 
 	}
 
-	public boolean onCommand(CommandSender sender, Command comando, String label, String[] args) {
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		Player jugador = (Player) sender;
 
 		if(args.length > 0) {
 			if(args[0].equalsIgnoreCase("version")) {
 
-				jugador.sendMessage("["+plugin.name+"]"+ChatColor.GOLD+" The version of the plugin is : "+ChatColor.WHITE+plugin.version);
+				jugador.sendMessage("["+plugin.name+"]"+ChatColor.BLUE+" The version of the plugin is : "+ChatColor.WHITE+plugin.version);
 				return true;
 
 			}else if(args[0].equalsIgnoreCase("reload") && jugador.isOp()) {
@@ -42,7 +42,7 @@ public class MainCommand implements CommandExecutor{
 			}else if(args[0].equalsIgnoreCase("support")){
 
 				jugador.sendMessage("["+plugin.name+"]"+ChatColor.GOLD+" Need help with our plugin?");
-				jugador.sendMessage(ChatColor.WHITE+"Join our discord : "+ChatColor.BLUE+"https://discord.gg/tADWVzqtWj");
+				jugador.sendMessage(ChatColor.WHITE+"Join our discord : "+ChatColor.BLUE+"https://discord.com/invite/JPcK4SN6RG");
 				return true;
 
 			}else {

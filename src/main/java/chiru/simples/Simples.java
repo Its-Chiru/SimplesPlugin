@@ -15,8 +15,13 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.*;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.function.Consumer;
 
 public final class Simples extends JavaPlugin {
 
@@ -64,6 +69,17 @@ public final class Simples extends JavaPlugin {
         //Scoreboard Scheduler
         scoreboardScheduleLoad();
 
+        //UpdateChecker
+
+        new UpdateChecker(this, 109934).getVersion(version -> {
+            if (this.getDescription().getVersion().equals(version)) {
+                System.out.println(ChatColor.GREEN+"You are on the latest plugin version!!");
+            } else {
+                System.out.println(ChatColor.RED+"There is a new update available!");
+                System.out.println(ChatColor.GREEN+"We highly recommend you to update to the newest one here: https://www.spigotmc.org/resources/"+"109934");
+            }
+        });
+
     }
 
 
@@ -72,6 +88,8 @@ public final class Simples extends JavaPlugin {
         // Plugin shutdown logic
         System.out.println(ChatColor.RED+"Plugin Desactivated | Made by : Chiru | Version : "+version);
     }
+
+    //Tab
 
     //Tab loads, this event will be called from other classes to be loaded again!
 
@@ -128,6 +146,7 @@ public final class Simples extends JavaPlugin {
         }, 0, tabSeconds * 20);
     }
 
+
     //Scoreboard
 
     public void scoreboardLoad(Player player) {
@@ -177,6 +196,31 @@ public final class Simples extends JavaPlugin {
                 scoreboardLoad(player);
             }
         }, 0, tabSeconds * 20);
+    }
+
+    //UpdateChecker
+
+    public class UpdateChecker {
+
+        private final JavaPlugin plugin;
+        private final int resourceId;
+
+        public UpdateChecker(JavaPlugin plugin, int resourceId) {
+            this.plugin = plugin;
+            this.resourceId = resourceId;
+        }
+
+        public void getVersion(final Consumer<String> consumer) {
+            Bukkit.getScheduler().runTaskAsynchronously(this.plugin, () -> {
+                try (InputStream inputStream = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + this.resourceId).openStream(); Scanner scanner = new Scanner(inputStream)) {
+                    if (scanner.hasNext()) {
+                        consumer.accept(scanner.next());
+                    }
+                } catch (IOException exception) {
+                    plugin.getLogger().info("Unable to check for updates: " + exception.getMessage());
+                }
+            });
+        }
     }
 
 
