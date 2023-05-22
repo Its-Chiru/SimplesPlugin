@@ -8,3 +8,8 @@ softdepend: [PlaceholderAPI]
 commands:
   Simples:
     description: Main Command!
+    aliases: [ simple ]
+  Broadcast:
+    description: Broadcast command
+    aliases: [ br, broadcast, announce, ann ]
+    permission: simples.broadcast

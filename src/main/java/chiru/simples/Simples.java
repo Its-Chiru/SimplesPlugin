@@ -1,11 +1,11 @@
 package chiru.simples;
 
+import commands.Broadcast;
 import commands.MainCommand;
 import commands.MainCommandTAB;
 import events.Chat;
 import events.Enter;
 import fr.mrmicky.fastboard.FastBoard;
-import jdk.tools.jmod.Main;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
@@ -13,7 +13,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scoreboard.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -54,6 +53,8 @@ public final class Simples extends JavaPlugin {
         getCommand("simples").setExecutor(new MainCommand(this));
         getCommand("simples").setTabCompleter(new MainCommandTAB());
 
+        getCommand("broadcast").setExecutor(new Broadcast(this));
+
         //Place Holder Api
 
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null){
@@ -79,6 +80,14 @@ public final class Simples extends JavaPlugin {
                 System.out.println(ChatColor.GREEN+"We highly recommend you to update to the newest one here: https://www.spigotmc.org/resources/"+"109934");
             }
         });
+
+        //Stats
+
+        // All you have to do is adding the following two lines in your onEnable method.
+        // You can find the plugin ids of your plugins on the page https://bstats.org/what-is-my-plugin-id
+        int pluginId = 18533; // <-- Replace with the id of your plugin!
+        Metrics metrics = new Metrics(this, pluginId);
+
 
     }
 

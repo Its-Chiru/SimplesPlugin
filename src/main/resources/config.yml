@@ -3,11 +3,8 @@
 
 Config:
 
-    SimpleServerWelcome:
-
-        enabled: true
-
-        welcome-message: "&e&kI &a&lWelcome %player_name%! &rThis welcome message, has been created with &6&lSimple Welcome&r!, change this on the &4&lconfig.yml &e&kI"
+    #This is the prefix for the /broadcast command!
+    broadcast: "&7&l[&9&lSimples&7&l] &r&l"
 
     #Use the following formats for the "chat-format"
     #   {MESSAGE} - The message
@@ -15,6 +12,12 @@ Config:
     #   {GROUP_PREFIX} - The player's group prefix *this uses Vault, this would be %vault_groupprefix%*
 
     chat-format: "{GROUP_PREFIX} &7| &r{DISPLAY_NAME} &r: &7{MESSAGE}"
+
+    SimpleServerWelcome:
+
+        enabled: true
+
+        welcome-message: "&e&kI &a&lWelcome %player_name%! &rThis welcome message, has been created with &6&lSimple Welcome&r!, change this on the &4&lconfig.yml &e&kI"
 
     #For the tab, you can use placeholders and colors, it reloads using the reload plugin, and rejoining!
     tab:
