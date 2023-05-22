@@ -1,9 +1,8 @@
-# Simples
+<h1>Simples</h1>
+<p>This simple plugin was made for you to enjoy!</p>
 
-Plugin made by: Chiru
+<h1>Support</h1>
 
-Plugin Link : https://www.spigotmc.org/resources/109934/
+If you need any kinda help check out the following:
 
-Wiki : https://chiru-1.gitbook.io/simples/
-
-Discord : https://discord.gg/tADWVzqtWj
+Discord : https://discord.gg/JPcK4SN6RG
