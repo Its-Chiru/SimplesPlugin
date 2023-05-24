@@ -13,6 +13,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,6 +32,10 @@ public final class Simples extends JavaPlugin {
     //PAPI
 
     public boolean hasPapi;
+
+    //Scoreboard Scheduler
+
+    private BukkitTask scoreboardTask;
 
     @Override
     public void onEnable() {
@@ -74,7 +79,7 @@ public final class Simples extends JavaPlugin {
 
         new UpdateChecker(this, 109934).getVersion(version -> {
             if (this.getDescription().getVersion().equals(version)) {
-                System.out.println(ChatColor.GREEN+"You are on the latest plugin version!!");
+                System.out.println("You are on the latest plugin version!!");
             } else {
                 System.out.println(ChatColor.RED+"There is a new update available!");
                 System.out.println(ChatColor.GREEN+"We highly recommend you to update to the newest one here: https://www.spigotmc.org/resources/"+"109934");
@@ -194,17 +199,32 @@ public final class Simples extends JavaPlugin {
         else {
             board.updateLines(coloredLines);
         }
+        //Scoreboard Scheduler turn on again.
+        if(scoreboardTask == null){
+            scoreboardScheduleLoad();
+        }
     }
 
     //Scoreboard Schedule
 
     public void scoreboardScheduleLoad(){
         int tabSeconds = getConfig().getInt("Config.scoreboard.seconds");
-        Bukkit.getScheduler().runTaskTimer(this, () ->{
-            for(Player player : Bukkit.getOnlinePlayers()){
+        scoreboardTask = Bukkit.getScheduler().runTaskTimer(this, () -> {
+            for (Player player : Bukkit.getOnlinePlayers()) {
                 scoreboardLoad(player);
             }
         }, 0, tabSeconds * 20);
+    }
+
+    //Hide Scoreboard
+
+    public void hideScoreboard(Player player){
+        FastBoard board = new FastBoard(player);
+        //Stop schedule
+        if(scoreboardTask != null){
+            scoreboardTask.cancel();
+        }
+
     }
 
     //UpdateChecker

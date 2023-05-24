@@ -45,6 +45,26 @@ public class MainCommand implements CommandExecutor{
 				jugador.sendMessage(ChatColor.WHITE+"Join our discord : "+ChatColor.BLUE+"https://discord.com/invite/JPcK4SN6RG");
 				return true;
 
+			}else if(args[0].equalsIgnoreCase("toggle")){
+
+				if(args[1].equalsIgnoreCase("scoreboard")) {
+					if(args[2].equalsIgnoreCase("on")){
+						jugador.sendMessage("["+plugin.name+"]"+ChatColor.GREEN+" scoreboard toggled "+ChatColor.GREEN+"ON!");
+						plugin.scoreboardLoad(jugador);
+					}else if(args[2].equalsIgnoreCase("off")){
+						jugador.sendMessage("["+plugin.name+"]"+ChatColor.GREEN+" scoreboard toggled "+ChatColor.RED+"OFF!");
+						plugin.hideScoreboard(jugador);
+					}
+					else {
+						jugador.sendMessage("["+plugin.name+"]"+ChatColor.RED+" please select if you want to toggle it on or off!");
+					}
+					return true;
+				}
+				else {
+					jugador.sendMessage("["+plugin.name+"]"+ChatColor.RED+" please select an option to toggle!");
+				}
+				return true;
+
 			}else {
 
 				jugador.sendMessage("["+plugin.name+"]"+ChatColor.RED+" That command doesnt exist!");

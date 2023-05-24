@@ -17,7 +17,22 @@ public class MainCommandTAB implements TabCompleter {
             arguments.add("reload");
             arguments.add("version");
             arguments.add("support");
+            arguments.add("toggle");
+            return arguments;
 
+        }
+        if(args.length == 2 && args[0].equalsIgnoreCase("toggle")){
+
+            List<String> arguments = new ArrayList<>();
+            arguments.add("scoreboard");
+            return arguments;
+
+        }
+        if(args.length == 3 && args[0].equalsIgnoreCase("toggle") && args[1].equalsIgnoreCase("scoreboard")){
+
+            List<String> arguments = new ArrayList<>();
+            arguments.add("on");
+            arguments.add("off");
             return arguments;
 
         }
