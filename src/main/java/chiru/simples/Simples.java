@@ -5,7 +5,7 @@ import commands.MainCommand;
 import commands.MainCommandTAB;
 import events.Chat;
 import events.Enter;
-import fr.mrmicky.fastboard.FastBoard;
+import files.ScoreboardManager;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
@@ -13,12 +13,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.scoreboard.Score;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.function.Consumer;
@@ -35,7 +34,8 @@ public final class Simples extends JavaPlugin {
 
     //Scoreboard Scheduler
 
-    private BukkitTask scoreboardTask;
+    public ScoreboardManager sm;
+
 
     @Override
     public void onEnable() {
@@ -46,7 +46,10 @@ public final class Simples extends JavaPlugin {
 
         //Config
 
+        //This is for the default config.yml
+
         saveDefaultConfig();
+
 
         //Register Events
 
@@ -73,7 +76,8 @@ public final class Simples extends JavaPlugin {
         tabScheduleLoad();
 
         //Scoreboard Scheduler
-        scoreboardScheduleLoad();
+        sm = new ScoreboardManager(this);
+        sm.scoreboardScheduleLoad();
 
         //UpdateChecker
 
@@ -158,73 +162,6 @@ public final class Simples extends JavaPlugin {
                 tabLoad(player);
             }
         }, 0, tabSeconds * 20);
-    }
-
-
-    //Scoreboard
-
-    public void scoreboardLoad(Player player) {
-        // Scoreboard using FastBoard
-        // Link: https://github.com/MrMicky-FR/FastBoard
-        FastBoard board = new FastBoard(player);
-
-        // Set title
-        String title = ChatColor.translateAlternateColorCodes('&', getConfig().getString("Config.scoreboard.title"));
-        board.updateTitle(title);
-
-        // Change Lines
-        List<String> lines = getConfig().getStringList("Config.scoreboard.values");
-        List<String> coloredLines = new ArrayList<>();
-        List<String> papiLines = new ArrayList<>();
-        for (String line : lines) {
-            //Color Lines
-            String coloredLine = ChatColor.translateAlternateColorCodes('&', line);
-            //Check Placeholders
-            if(hasPapi){
-                String papiLine = PlaceholderAPI.setPlaceholders(player, coloredLine);
-                papiLines.add(papiLine);
-
-            }
-            else {
-
-                coloredLines.add(coloredLine);
-
-            };
-        }
-        //Save lines
-        //Check Placeholders Again
-        if(hasPapi){
-            board.updateLines(papiLines);
-        }
-        else {
-            board.updateLines(coloredLines);
-        }
-        //Scoreboard Scheduler turn on again.
-        if(scoreboardTask == null){
-            scoreboardScheduleLoad();
-        }
-    }
-
-    //Scoreboard Schedule
-
-    public void scoreboardScheduleLoad(){
-        int tabSeconds = getConfig().getInt("Config.scoreboard.seconds");
-        scoreboardTask = Bukkit.getScheduler().runTaskTimer(this, () -> {
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                scoreboardLoad(player);
-            }
-        }, 0, tabSeconds * 20);
-    }
-
-    //Hide Scoreboard
-
-    public void hideScoreboard(Player player){
-        FastBoard board = new FastBoard(player);
-        //Stop schedule
-        if(scoreboardTask != null){
-            scoreboardTask.cancel();
-        }
-
     }
 
     //UpdateChecker

@@ -1,7 +1,7 @@
 package events;
 
 import chiru.simples.Simples;
-import chiru.simples.Simples;
+import files.ScoreboardManager;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -10,12 +10,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import javax.swing.*;
-import java.util.List;
-
 public class Enter implements Listener{
 	
-private final Simples plugin;
+    private final Simples plugin;
 	
 	public Enter(Simples plugin) {
 		this.plugin = plugin;
@@ -45,7 +42,7 @@ private final Simples plugin;
 
 		//Scoreboard
 
-		plugin.scoreboardLoad(jugador);
+		plugin.sm.scoreboardLoad(jugador);
 
 	}
 

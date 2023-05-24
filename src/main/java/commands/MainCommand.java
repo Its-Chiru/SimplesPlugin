@@ -1,6 +1,7 @@
 package commands;
 
 import chiru.simples.Simples;
+import files.ScoreboardManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -11,11 +12,11 @@ import org.bukkit.entity.Player;
 public class MainCommand implements CommandExecutor{
 
 	private Simples plugin;
+	private ScoreboardManager sm;
 
 	public MainCommand(Simples plugin) {
 
 		this.plugin = plugin;
-
 	}
 
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -32,7 +33,7 @@ public class MainCommand implements CommandExecutor{
 				plugin.reloadConfig();
 				for (Player player : Bukkit.getOnlinePlayers()){
 					plugin.tabLoad(player);
-					plugin.scoreboardLoad(player);
+					plugin.sm.scoreboardLoad(jugador);
 				}
 				Bukkit.getConsoleSender().sendMessage("["+plugin.name+"]"+ChatColor.GREEN+" Config reloaded!");
 				jugador.sendMessage("["+plugin.name+"]"+ChatColor.GREEN+" Config reloaded!");
@@ -50,10 +51,10 @@ public class MainCommand implements CommandExecutor{
 				if(args[1].equalsIgnoreCase("scoreboard")) {
 					if(args[2].equalsIgnoreCase("on")){
 						jugador.sendMessage("["+plugin.name+"]"+ChatColor.GREEN+" scoreboard toggled "+ChatColor.GREEN+"ON!");
-						plugin.scoreboardLoad(jugador);
+						plugin.sm.scoreboardLoad(jugador);
 					}else if(args[2].equalsIgnoreCase("off")){
 						jugador.sendMessage("["+plugin.name+"]"+ChatColor.GREEN+" scoreboard toggled "+ChatColor.RED+"OFF!");
-						plugin.hideScoreboard(jugador);
+						plugin.sm.hideScoreboard(jugador);
 					}
 					else {
 						jugador.sendMessage("["+plugin.name+"]"+ChatColor.RED+" please select if you want to toggle it on or off!");
