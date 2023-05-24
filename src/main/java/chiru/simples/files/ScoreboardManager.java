@@ -1,4 +1,4 @@
-package files;
+package chiru.simples.files;
 
 import chiru.simples.Simples;
 import fr.mrmicky.fastboard.FastBoard;

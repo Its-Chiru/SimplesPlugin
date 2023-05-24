@@ -1,7 +1,6 @@
-package commands;
+package chiru.simples.commands;
 
 import chiru.simples.Simples;
-import files.ScoreboardManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -12,7 +11,7 @@ import org.bukkit.entity.Player;
 public class MainCommand implements CommandExecutor{
 
 	private Simples plugin;
-	private ScoreboardManager sm;
+
 
 	public MainCommand(Simples plugin) {
 
@@ -32,7 +31,7 @@ public class MainCommand implements CommandExecutor{
 
 				plugin.reloadConfig();
 				for (Player player : Bukkit.getOnlinePlayers()){
-					plugin.tabLoad(player);
+					plugin.tab.tabLoad(player);
 					plugin.sm.scoreboardLoad(jugador);
 				}
 				Bukkit.getConsoleSender().sendMessage("["+plugin.name+"]"+ChatColor.GREEN+" Config reloaded!");

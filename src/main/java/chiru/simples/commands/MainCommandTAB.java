@@ -1,4 +1,4 @@
-package commands;
+package chiru.simples.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

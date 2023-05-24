@@ -1,24 +1,21 @@
 package chiru.simples;
 
-import commands.Broadcast;
-import commands.MainCommand;
-import commands.MainCommandTAB;
-import events.Chat;
-import events.Enter;
-import files.ScoreboardManager;
-import me.clip.placeholderapi.PlaceholderAPI;
+import chiru.simples.commands.Broadcast;
+import chiru.simples.commands.MainCommand;
+import chiru.simples.commands.MainCommandTAB;
+import chiru.simples.events.Chat;
+import chiru.simples.events.Enter;
+import chiru.simples.files.ScoreboardManager;
+import chiru.simples.files.TabManager;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scoreboard.Score;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.List;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
@@ -32,10 +29,11 @@ public final class Simples extends JavaPlugin {
 
     public boolean hasPapi;
 
-    //Scoreboard Scheduler
-
+    //Scoreboard
     public ScoreboardManager sm;
 
+    //Tab
+    public TabManager tab;
 
     @Override
     public void onEnable() {
@@ -49,7 +47,6 @@ public final class Simples extends JavaPlugin {
         //This is for the default config.yml
 
         saveDefaultConfig();
-
 
         //Register Events
 
@@ -73,7 +70,8 @@ public final class Simples extends JavaPlugin {
         }
 
         //Tab Scheduler
-        tabScheduleLoad();
+        tab = new TabManager(this);
+        tab.tabScheduleLoad();
 
         //Scoreboard Scheduler
         sm = new ScoreboardManager(this);
@@ -105,63 +103,6 @@ public final class Simples extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         System.out.println(ChatColor.RED+"Plugin Desactivated | Made by : Chiru | Version : "+version);
-    }
-
-    //Tab
-
-    //Tab loads, this event will be called from other classes to be loaded again!
-
-    public void tabLoad(Player player){
-        if(getConfig().getBoolean("Config.tab.enabled") == true){
-
-            //Name of the player
-
-            String name = getConfig().getString("Config.tab.name");
-            String coloredName = ChatColor.translateAlternateColorCodes('&',name);
-
-            //Rest of tab
-
-            List<String> headerLines = getConfig().getStringList("Config.tab.header");
-
-            String combinedHeader = String.join("\n", headerLines);
-
-            String coloredHeader = ChatColor.translateAlternateColorCodes('&', combinedHeader);
-
-            //Lo mismo para el footer
-
-            List<String> footerLines = getConfig().getStringList("Config.tab.footer");
-
-            String combinedFooter = String.join("\n", footerLines);
-
-            String coloredFooter = ChatColor.translateAlternateColorCodes('&', combinedFooter);
-
-            //Finally actually setting the tab visible
-
-            if(hasPapi == true){
-                String papiHeader = PlaceholderAPI.setPlaceholders(player, coloredHeader);
-                String papiFooter = PlaceholderAPI.setPlaceholders(player, coloredFooter);
-                player.setPlayerListHeaderFooter(papiHeader, papiFooter);
-                //For the name of the tab
-                String papiName = PlaceholderAPI.setPlaceholders(player,coloredName);
-                String coloredPapiName = ChatColor.translateAlternateColorCodes('&', papiName);
-                player.setPlayerListName(coloredPapiName);
-            }
-            else {
-                player.setPlayerListHeaderFooter(coloredHeader, coloredFooter);
-                player.setPlayerListName(coloredName);
-            }
-        }
-    }
-
-    //Tab load after a time!
-
-    public void tabScheduleLoad(){
-        int tabSeconds = getConfig().getInt("Config.tab.seconds");
-        Bukkit.getScheduler().runTaskTimer(this, () ->{
-            for(Player player : Bukkit.getOnlinePlayers()){
-                tabLoad(player);
-            }
-        }, 0, tabSeconds * 20);
     }
 
     //UpdateChecker

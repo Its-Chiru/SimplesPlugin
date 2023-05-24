@@ -1,7 +1,6 @@
-package events;
+package chiru.simples.events;
 
 import chiru.simples.Simples;
-import files.ScoreboardManager;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -38,7 +37,7 @@ public class Enter implements Listener{
 
 		//Tab
 
-		plugin.tabLoad(jugador);
+		plugin.tab.tabLoad(jugador);
 
 		//Scoreboard
 

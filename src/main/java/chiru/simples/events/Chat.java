@@ -1,4 +1,4 @@
-package events;
+package chiru.simples.events;
 
 import chiru.simples.Simples;
 import me.clip.placeholderapi.PlaceholderAPI;
