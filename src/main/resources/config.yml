@@ -21,6 +21,9 @@ Config:
 
         enabled: true
 
+        #This setting will make the message show up after a certain ammount of logins. / If set to 0 will always show up
+        every: 0
+
         welcome-message: "&e&kI &a&lWelcome %player_name%! &rThis welcome message, has been created with &6&lSimple Welcome&r!, change this on the &4&lconfig.yml &e&kI"
 
     #For the tab, you can use placeholders and colors, it reloads using the reload plugin, and rejoining!
