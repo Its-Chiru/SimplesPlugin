@@ -1,6 +1,7 @@
 package chiru.simples.commands;
 
 import chiru.simples.Simples;
+import chiru.simples.files.PlayerDataConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -30,6 +31,7 @@ public class MainCommand implements CommandExecutor{
 			}else if(args[0].equalsIgnoreCase("reload") && jugador.isOp()) {
 
 				plugin.reloadConfig();
+				PlayerDataConfig.reload();
 				for (Player player : Bukkit.getOnlinePlayers()){
 					plugin.tab.tabLoad(player);
 					plugin.sm.scoreboardLoad(jugador);

@@ -21,10 +21,22 @@ Config:
 
         enabled: true
 
+        #Displays the default message when the custom isnt enabled
+        display-default: false
+
         #This setting will make the message show up after a certain ammount of logins. / If set to 0 will always show up
+        #But if for example you put 5, the message will show up the 6th time you entered
         every: 0
 
-        welcome-message: "&e&kI &a&lWelcome %player_name%! &rThis welcome message, has been created with &6&lSimple Welcome&r!, change this on the &4&lconfig.yml &e&kI"
+       #If more than one message, the message will be randomized.
+        welcome-messages:
+            - "&e&kI &a&lWelcome %player_name%! &rThis welcome message, has been created with &6&lSimple Welcome&r!, change this on the &4&lconfig.yml &e&kI"
+            - "&aWelcome, &f&l%player_name%! &eThis is another example message!"
+            - "&b&lGreetings, %player_name%! &rEnjoy your time here at &d&lExample Server Name&r!, change this on the &4&lconfig.yml"
+            - "&9&lAhoy, %player_name%! &rSail the seas of &3&lExample Server Name&r and discover hidden treasures!"
+            - "&aHey %player_name%, welcome aboard! Have a great time!"
+            - "&eWelcome, %player_name%! Enjoy your stay on our server!, change this on the &4&lconfig.yml"
+            - "&6Ahoy, %player_name%! Your presence illuminates our server like a golden block!"
 
     #For the tab, you can use placeholders and colors, it reloads using the reload plugin, and rejoining!
     tab:

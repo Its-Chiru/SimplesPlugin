@@ -1,8 +1,6 @@
 package chiru.simples;
 
-import chiru.simples.commands.Broadcast;
-import chiru.simples.commands.MainCommand;
-import chiru.simples.commands.MainCommandTAB;
+import chiru.simples.commands.*;
 import chiru.simples.events.Chat;
 import chiru.simples.events.Enter;
 import chiru.simples.files.PlayerDataConfig;
@@ -11,7 +9,7 @@ import chiru.simples.files.TabManager;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -54,7 +52,6 @@ public final class Simples extends JavaPlugin {
         //This is for player-data.yml
 
         PlayerDataConfig.setup();
-        PlayerDataConfig.get().addDefault("test", "lol");
         PlayerDataConfig.get().options().copyDefaults(true);
         PlayerDataConfig.save();
 

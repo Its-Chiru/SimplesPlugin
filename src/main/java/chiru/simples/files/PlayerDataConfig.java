@@ -20,7 +20,7 @@ public class PlayerDataConfig {
     //Runs every time it starts up
     public static void setup(){
         //Gets the "player-data,yml"
-        file = new File(Bukkit.getServer().getPluginManager().getPlugin("SimplePlugin").getDataFolder(), "player-data.yml");
+        file = new File(Bukkit.getServer().getPluginManager().getPlugin("Simples").getDataFolder(), "player-data.yml");
 
         //If it doesnt exist generate it
         if(!file.exists()){
