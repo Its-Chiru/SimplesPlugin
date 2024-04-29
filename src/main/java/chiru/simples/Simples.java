@@ -1,6 +1,9 @@
 package chiru.simples;
 
 import chiru.simples.commands.*;
+import chiru.simples.commands.home.DelHome;
+import chiru.simples.commands.home.Home;
+import chiru.simples.commands.home.SetHome;
 import chiru.simples.events.Chat;
 import chiru.simples.events.Enter;
 import chiru.simples.files.PlayerDataConfig;
@@ -66,6 +69,10 @@ public final class Simples extends JavaPlugin {
         getCommand("simples").setTabCompleter(new MainCommandTAB());
 
         getCommand("broadcast").setExecutor(new Broadcast(this));
+
+        getCommand("home").setExecutor(new Home(this));
+        getCommand("delhome").setExecutor(new DelHome(this));
+        getCommand("sethome").setExecutor(new SetHome(this));
 
         //Place Holder Api
 

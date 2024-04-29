@@ -13,3 +13,13 @@ commands:
     description: Broadcast command
     aliases: [ br, broadcast, announce, ann ]
     permission: simples.broadcast
+  Home:
+    description: Teleports you to your home
+    permission: simples.home
+  SetHome:
+    description: Sets your home
+    permission: simples.home.sethome
+  DelHome:
+    aliases: [ deletehome ]
+    description: Deletes your home
+    permission: simples.home.delhome
